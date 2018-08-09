@@ -251,5 +251,8 @@ TW_INCLUDE_NTFS_3G := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_NO_USB_STORAGE := true
 
+# Vendor
+BOARD_PREBUILT_VENDORIMAGE := true
+
 # inherit from the proprietary version
 -include vendor/zte/axon7/BoardConfigVendor.mk
