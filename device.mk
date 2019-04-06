@@ -93,7 +93,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapsize=512m \
     dalvik.vm.heaptargetutilization=0.75 \
     dalvik.vm.heapminfree=512k \
-    dalvik.vm.heapmaxfree=8m
+    dalvik.vm.heapmaxfree=8m \
+    ro.af.client_heap_size_kbyte=7168 \
+    persist.vendor.audio.hw.binder.size_kbyte=1024
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -113,7 +115,13 @@ PRODUCT_PACKAGES += \
     libqcomvisualizer \
     libqcomvoiceprocessing \
     libvolumelistener \
-    tinymix
+    tinymix \
+    android.hardware.audio@4.0 \
+    android.hardware.audio.common@4.0 \
+    android.hardware.audio.common@4.0-util \
+    android.hardware.audio@4.0-impl \
+    android.hardware.audio.effect@4.0 \
+    android.hardware.audio.effect@4.0-impl
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
