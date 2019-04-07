@@ -31,7 +31,7 @@ e2fsck_src_files := \
 
 e2fsck_c_includes := external/e2fsprogs/lib
 
-e2fsck_cflags := -O2 -g -W -Wall
+e2fsck_cflags := -W -Wall -fno-strict-aliasing -Wno-sign-compare
 
 e2fsck_shared_libraries := \
 	libext2fs \

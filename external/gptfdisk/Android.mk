@@ -25,7 +25,7 @@ sgdisk_shared_libraries := \
 
 sgdisk_system_shared_libraries := libc
 
-sgdisk_cflags := -O2 -g -W -Wall
+sgdisk_cflags := -Wno-unused-parameter -Wno-pragma-pack -Werror
 
 include $(CLEAR_VARS)
 
