@@ -13,37 +13,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 LOCAL_PATH := external/toybox
-
 #
-# To update:
+# To sync with upstream:
 #
-
+#  # Update.
 #  git remote add toybox https://github.com/landley/toybox.git
 #  git fetch toybox
 #  git merge toybox/master
+#  # Regenerate generated files.
+#  make
+#  # Make any necessary Android.mk changes and rebuild.
 #  mm -j32
-#  # (Make any necessary Android.mk changes and test the new toybox.)
-#  repo upload .
+#  # Run tests.
+#  ./run-tests-on-android.sh
+#  # Run a single test.
+#  ./run-tests-on-android.sh wc
+#  # Upload changes.
+#  git commit -a --amend
 #  git push aosp HEAD:refs/for/master  # Push to gerrit for review.
 #  git push aosp HEAD:master  # Push directly, avoiding gerrit.
 #
-#  # Now commit any necessary Android.mk changes like normal:
-#  repo start post-sync .
-#  git commit -a
-
-
-#
 # To add a toy:
 #
-
 #  Edit .config to enable the toy you want to add.
 #  make clean && make  # Regenerate the generated files.
 #  # Edit LOCAL_SRC_FILES below to add the toy.
 #  # If you just want to use it as "toybox x" rather than "x", you can stop now.
 #  # If you want this toy to have a symbolic link in /system/bin, add the toy to ALL_TOOLS.
-
 common_SRC_FILES := \
     lib/args.c \
     lib/dirtree.c \
@@ -122,6 +119,7 @@ common_SRC_FILES := \
     toys/other/realpath.c \
     toys/other/rev.c \
     toys/other/rmmod.c \
+    toys/other/setfattr.c \
     toys/other/setsid.c \
     toys/other/stat.c \
     toys/other/swapoff.c \
@@ -141,12 +139,13 @@ common_SRC_FILES := \
     toys/pending/dd.c \
     toys/pending/diff.c \
     toys/pending/expr.c \
+    toys/pending/fmt.c \
     toys/pending/getfattr.c \
     toys/pending/gzip.c \
     toys/pending/lsof.c \
     toys/pending/modprobe.c \
     toys/pending/more.c \
-    toys/pending/setfattr.c \
+    toys/pending/stty.c \
     toys/pending/tar.c \
     toys/pending/tr.c \
     toys/pending/traceroute.c \
@@ -211,8 +210,9 @@ common_SRC_FILES := \
     toys/posix/xargs.c \
 
 common_CFLAGS := \
-    -std=c99 \
+    -std=gnu11 \
     -Os \
+    -Wall -Werror \
     -Wno-char-subscripts \
     -Wno-gnu-variable-sized-type-not-at-end \
     -Wno-missing-field-initializers \
@@ -230,14 +230,13 @@ toybox_version := $(toybox_upstream_version)-android
 
 toybox_libraries := liblog libselinux libcutils libcrypto libz
 
-common_CFLAGS += -DTOYBOX_VERSION=\"$(toybox_version)\"
+common_CFLAGS += -DTOYBOX_VENDOR=\"-android\"
 
 # not usable on Android?: freeramdisk fsfreeze install makedevs nbd-client
 #                         partprobe pivot_root pwdx rev rfkill vconfig
 # currently prefer BSD system/core/toolbox: dd
 # currently prefer BSD external/netcat: nc netcat
 # currently prefer external/efs2progs: blkid chattr lsattr
-#
 
 ALL_RECOVERY_TOOLS := \
     echo \
