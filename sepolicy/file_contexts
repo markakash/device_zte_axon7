@@ -22,3 +22,7 @@
 # HALs
 /(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service\.axon7    u:object_r:hal_light_default_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.vr@1\.0-service.axon7        u:object_r:hal_vr_default_exec:s0
+
+#Camera
+/vendor/lib/full/libbinder\.so             u:object_r:system_file:s0
+/vendor/lib/full/libcutils\.so             u:object_r:system_file:s0

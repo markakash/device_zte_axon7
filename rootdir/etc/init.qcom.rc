@@ -71,6 +71,10 @@ on late-fs
     write /sys/block/dm-0/queue/read_ahead_kb 2048
     write /sys/block/dm-1/queue/read_ahead_kb 2048
 
+    # Hack for oreo camera blobs
+    mount none /vendor/lib/full/libbinder.so /system/lib/vndk-28/libbinder.so bind
+    mount none /vendor/lib/full/libcutils.so /system/lib/vndk-sp-28/libcutils.so bind
+
 on post-fs-data
     mkdir /data/vendor/misc 01771 system system
 
@@ -545,12 +549,6 @@ service imsdatadaemon /vendor/bin/imsdatadaemon
 on property:vendor.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
 
-service ims_rtp_daemon /vendor/bin/ims_rtp_daemon
-    class main
-    user system
-    group radio diag inet log
-    disabled
-
 service vendor.imsrcsservice /vendor/bin/imsrcsd
     class main
     user system
@@ -559,7 +557,6 @@ service vendor.imsrcsservice /vendor/bin/imsrcsd
     disabled
 
 on property:vendor.ims.DATA_DAEMON_STATUS=1
-    start ims_rtp_daemon
     start vendor.imsrcsservice
 
 service ppd /vendor/bin/mm-pp-dpps
@@ -574,9 +571,3 @@ on property:init.svc.surfaceflinger=restarting
 
 on property:slpi.restart=1
     write /sys/kernel/debug/msm_subsys/slpi restart
-
-service gx_fpd /vendor/bin/gx_fpd
-    class late_start
-    user root
-    group system
-    writepid /dev/cpuset/system-background/tasks

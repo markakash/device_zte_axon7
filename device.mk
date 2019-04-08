@@ -147,10 +147,10 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0
 
 # ANT+
-PRODUCT_PACKAGES += \
-    AntHalService \
-    com.dsi.ant.antradio_library \
-    libantradio
+#PRODUCT_PACKAGES += \
+#    AntHalService \
+#    com.dsi.ant.antradio_library \
+#    libantradio
 
 # Charger
 PRODUCT_PACKAGES += \
@@ -213,7 +213,6 @@ PRODUCT_PACKAGES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl-qti \
     libcurl \
     libgnss \
     libgnsspps

@@ -141,6 +141,8 @@ vendor/lib/libseemore.so
 vendor/lib/libtsvideoprocess.so
 vendor/lib/libubifocus.so
 vendor/lib/libZEffectLib.so
+vendor/lib/full/libbinder.so|878062dea4925dd303ff026e07266f90fdb52c02
+vendor/lib/full/libcutils.so|80f6e21fc5aade324dbc53967f6d129f9846ef29
 
 # Camera actuator
 vendor/lib/libactuator_ak7371.so
