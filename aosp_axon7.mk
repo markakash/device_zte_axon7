@@ -23,10 +23,13 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, device/zte/axon7/device.mk)
 
 # Inherit some common LineageOS stuff.
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
+
+TARGET_GAPPS_ARCH :=arm64
+TARGET_BOOT_ANIMATION_RES := 1440
 
 # Device identifier. This must come after all inclusions.
-PRODUCT_NAME := lineage_axon7
+PRODUCT_NAME := aosp_axon7
 PRODUCT_DEVICE := axon7
 PRODUCT_BRAND := ZTE
 PRODUCT_MODEL := ZTE A2017U

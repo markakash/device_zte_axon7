@@ -1,10 +1,5 @@
 vndbinder_use(hal_fingerprint_default)
 
-# callback to gx_fpd with binder
-binder_call(hal_fingerprint_default, gx_fpd);
-
-allow hal_fingerprint_default gx_fpd_service:service_manager find;
-
 # allow TEE
 allow hal_fingerprint_default tee_device:chr_file rw_file_perms;
 
